@@ -225,6 +225,14 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavi
                 }
             }
         }
+
+        if let gestures = superview?.superview?.gestureRecognizers {
+            for gesture in gestures {
+                if NSStringFromClass(type(of: gesture)) == "DelayingGestureRecognizer" {
+                    gesture.isEnabled = false
+                }
+            }
+        }
         
         return super.hitTest(point, with: event)
     }
